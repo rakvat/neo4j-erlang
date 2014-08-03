@@ -20,6 +20,10 @@ This readme and all comments throughout the code have been updated to reflect th
 
 ## How?
 
+### Build
+
+You should have the rebar executable in your path. Run 'make' and 'make test'.
+
 ### Sample session
 
 ```erlang

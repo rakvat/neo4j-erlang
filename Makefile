@@ -1,11 +1,21 @@
-PROJECT = neo4j
+REBAR:=rebar
 
-DEPS = hackney jiffy
-dep_hackney = https://github.com/benoitc/hackney
-dep_jiffy = https://github.com/davisp/jiffy
+.PHONY: all erl test clean doc 
 
-PLT_APPS ?= asn1 compiler crypto erts inets kernel public_key stdlib ssl syntax_tools
+all: erl
 
-CT_SUITES ?= neo4j
+erl:
+	$(REBAR) get-deps compile
 
-include erlang.mk
+test: all
+	@mkdir -p .eunit
+	#$(REBAR) skip_deps=true eunit
+	$(REBAR) skip_deps=true ct
+
+clean:
+	$(REBAR) clean
+	-rm -rvf deps ebin doc .eunit
+
+doc:
+	$(REBAR) doc
+
